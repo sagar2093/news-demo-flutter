@@ -7,7 +7,7 @@ import 'package:news_flutter/ui/articledetailpage.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({ Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -26,10 +26,10 @@ class _HomePageState extends State<HomePage> {
           builder: (context, snapshot) {
             if (snapshot.hasError) return Text("${snapshot.error}");
             if (snapshot.hasData) {
-              if (snapshot.data.status == "ok") {
-                return ArticleList(articles: snapshot.data.articles);
+              if (snapshot.data?.status == "ok") {
+                return ArticleList(articles: snapshot.data?.articles ??[]);
               } else {
-                return Text("${snapshot.data.message}");
+                return Text("${snapshot.data?.message ??""}");
               }
             } else {
               return Center(child: CircularProgressIndicator());
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
 class ArticleList extends StatelessWidget {
   final List<Article> articles;
 
-  ArticleList({Key key, this.articles}) : super(key: key);
+  ArticleList({Key? key,required this.articles}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class ArticleList extends StatelessWidget {
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => ArticleDetailPage(
-                  articleUrl: item.url,
+                  articleUrl: item.url ??'',
                 ),
               ),
             ),

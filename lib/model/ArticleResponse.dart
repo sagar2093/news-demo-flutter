@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:news_flutter/model/Article.dart';
 
 class ArticleResponse {
-  List<Article> articles;
-  String status;
-  String message;
-  int totalResults;
+  List<Article>? articles;
+  String? status;
+  String? message;
+  int? totalResults;
 
   ArticleResponse({this.articles, this.status, this.message,this.totalResults});
 
@@ -27,7 +27,7 @@ class ArticleResponse {
     data['message'] = this.message;
     data['totalResults'] = this.totalResults;
     if (this.articles != null) {
-      data['articles'] = this.articles.map((v) => v.toJson()).toList();
+      data['articles'] = this.articles?.map((v) => v.toJson()).toList();
     }
     return data;
   }

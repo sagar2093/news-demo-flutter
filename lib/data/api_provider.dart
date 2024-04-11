@@ -17,7 +17,7 @@ abstract class UrlConstants {
 
 Future<ArticleResponse> fetchTopHeadlines() async {
   final response =
-      await httpDart.get(UrlConstants.topHeadlines, headers: headers);
+      await httpDart.get(Uri.parse(UrlConstants.topHeadlines), headers: headers);
   if (response.statusCode == 200) {
     return compute(parseArticleResponse, response.body);
   } else {
@@ -27,7 +27,7 @@ Future<ArticleResponse> fetchTopHeadlines() async {
 
 Future<ArticleResponse> fetchTopHeadlinesIn() async {
   final response =
-      await httpDart.get(UrlConstants.topHeadlinesIn, headers: headers);
+      await httpDart.get(Uri.parse(UrlConstants.topHeadlinesIn), headers: headers);
   if (response.statusCode == 200) {
     return compute(parseArticleResponse, response.body);
   } else {
