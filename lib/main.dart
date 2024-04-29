@@ -1,19 +1,21 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:news_flutter/ui/homepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(MyApp());
+import 'app/app.dart';
+import 'data/get_it.dart';
+import 'data/prefs.dart';
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'News Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(title: 'News Demo'),
-    );
-  }
+/// dart run build_runner build --delete-conflicting-outputs
+/// flutter run -t lib/main.dart
+void main() => mainCommon();
+
+Future<void> mainCommon() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+  sharedPrefs.setBool(Prefs.keyLoggerEnabled, !kReleaseMode);
+  setupGetIt(sharedPrefs);
+
+  runApp(const NewsDemoApp());
 }
