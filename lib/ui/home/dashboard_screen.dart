@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../data/api/api_config.dart';
 import '../news_category/news_category_controller.dart';
 import '../news_category/news_category_tab.dart';
+import '../sample_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -37,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         ...NewsCategory.values.map((e) => ChangeNotifierProvider(
               create: (_) => NewsCategoryController(e),
-              child: NewsCategoryTab(),
+              child: const NewsCategoryTab(),
             ))
       ];
 
@@ -51,11 +52,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
           actions: [
             IconButton(
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SampleScreen()),
+                  );
+                },
+                icon: const Icon(Icons.info_outline)),
+            IconButton(
+                onPressed: () {
                   setState(() {
                     _showTab = !_showTab;
                   });
                 },
-                icon:  Icon(_showTab ? Icons.tab :Icons.tab_unselected))
+                icon: Icon(_showTab ? Icons.tab : Icons.tab_unselected))
           ],
           bottom: _showTab
               ? PreferredSize(

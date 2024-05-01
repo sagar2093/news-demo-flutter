@@ -1,4 +1,3 @@
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +38,8 @@ class NewsDemoApp extends StatelessWidget {
                 case HomeTab.routeName:
                   return ChangeNotifierProvider(
                     create: (_) => HomeController(),
-                    child: HomeTab(showAppBar: true,showCategories: true),
+                    child:
+                        const HomeTab(showAppBar: true, showCategories: true),
                   );
                 case NewsCategoryTab.routeName:
                   var arg = ModalRoute.of(context)?.settings.arguments;
@@ -48,16 +48,16 @@ class NewsDemoApp extends StatelessWidget {
                   return ChangeNotifierProvider(
                     create: (_) => NewsCategoryController(
                         category ?? NewsCategory.values.first),
-                    child: NewsCategoryTab(showAppBar: true),
+                    child: const NewsCategoryTab(showAppBar: true),
                   );
                 case ArticleDetailScreen.routeName:
                   var arg = ModalRoute.of(context)?.settings.arguments;
                   if (arg is Article) {
                     return ArticleDetailScreen(arg);
                   }
-                  return PageNotFound();
+                  return const PageNotFound();
                 default:
-                  return PageNotFound();
+                  return const PageNotFound();
               }
             });
       },
